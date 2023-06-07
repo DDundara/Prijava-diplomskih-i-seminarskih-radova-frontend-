@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../../Users/s30mikr/source/repos/inspekta10022023/frontend"
+		},
+		{
+			"path": "../../../../../../../priv/vueproject"
+		},
+		{
+			"path": "../../../../vuecrud/tecajevi-vue-frontend"
+		},
+		{
+			"path": "../../../../vuecrud/tecajevi-express-mongodb-backend"
+		},
+		{
+			"path": "../../../TT-node-express-sequelize-postgresql-master-backend"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}

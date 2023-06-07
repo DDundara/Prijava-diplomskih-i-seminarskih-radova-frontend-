@@ -1,0 +1,176 @@
+<template>
+  <div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Pretraga po imenu"
+          v-model="ime"/>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button"
+            @click="searchName"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-striped">
+      <h4>Popis usera</h4>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Grad</th>
+        <th>Spol</th>
+        <th>Grupa</th>
+        <th>Akcija</th>
+      </tr>
+      <tr  v-for="(user, index) in users" :key="index">
+        <td>        
+        {{user.id}}
+        </td>
+        <td>        
+        {{user.name}}
+        </td>
+        <td> 
+          {{user.email}}       
+        </td>
+        <td> 
+          {{user.gradnaziv}}       
+        </td>
+        <td v-if="user.spol==='M'"> 
+          Muški      
+        </td>
+        <td v-else> 
+          Ženski   
+        </td>
+        <td> 
+          {{user.grupanaziv}}       
+        </td>
+        <td>
+          <a v-bind:href="'/useredit/' + user.id"> Ažuriraj </a> | 
+          <a v-bind:href="'/userdelete/' + user.id"> Briši </a>
+        </td>
+      </tr>
+    </table>
+<!-- <p>Prije str: {{ this.$route.params.page }}</p> -->
+<div class="pagination" v-for="page in parseInt(totalPages)" :key="page" v-bind="page">
+
+  <a v-bind:href="'/usersperpage/'+page" v:model="page" v-if="page===parseInt(this.$route.params.page)" class="active" >{{ page }}</a>
+  <a v-bind:href="'/usersperpage/'+page" v:model="page" v-else >{{ page }}</a>
+
+</div>
+<p>&nbsp;</p>
+<div class="newline">
+  <a v-bind:href="'/adduser'" class="m-3 btn btn-sm btn-primary"> Add new </a></div>
+  </div>
+</template>
+
+<script>
+import UsersDataService from "../services/UsersDataService";
+
+export default {
+  name: "users-list",
+  data() {
+    return {
+      users: [],
+      totals: [],
+      total: null,
+      totalPages: null
+      //page: this.nthIndex()
+    };
+  },
+  methods: {
+    retrieveUsers(page) {
+      UsersDataService.getAllUsersPerPage(page)
+        .then(response => {
+          this.users = response.data;
+          console.log(response.data);
+          //console.log("stranica: "+this.page);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+        
+    },
+    retrieveTotalCountOfUsers() {
+      UsersDataService.getUsersTotal()
+        .then(response => {
+          this.totals = response.data;
+          console.log("Total: "+this.totals[0].total)
+          this.totalPages = this.totals[0].numOfpages;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+    // vrati(pg){
+    //   alert("st: "+pg)
+    // },
+    // reloadPage() {
+    //   //window.location.reload();
+    // },
+    // nthIndex(){
+    //     var str=String(window.location);
+    //     var pat="/";
+    //     var n = 4;
+    //     var L= str.length, i= -1;
+        
+    //     while(n-- && i++<L){
+    //         i= str.indexOf(pat, i);
+    //         if (i < 0) break;
+    //     }
+    //     var strana = str.substring(i+1,str.length)
+    //     return parseInt(strana);
+    // }
+
+    
+  },
+  mounted() {
+    this.retrieveUsers(this.$route.params.page);
+    this.retrieveTotalCountOfUsers();
+    
+    // var lokacija = String(window.location);
+    // console.log("Lokacija: "+lokacija)
+    // var poz = this.nthIndex()
+    // console.log("Poz: "+poz)
+    //console.log("Duljina: "+lokacija.length)
+    console.log("Stranica: "+this.$route.params.page)
+  }
+};
+</script>
+
+<style>
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+
+.pagination {
+  display: inline-block;
+  height: 45px;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.newline{
+  display: block;
+  clear: both;
+  margin-top: 50px;
+    margin-left: -143px;
+}
+</style>
