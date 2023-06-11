@@ -103,6 +103,18 @@ class UsersDataService {
   provjeriOcjenuMentora(idrad,idment) {
     return http.get("/provjeriocjenuradamentora/"+idrad+"/"+idment);
   }
+
+  getWorkForChangeStatus(idr,radname,autname,katname) {
+    return http.get(`/workstatus/${idr}/${{radname}}/${{autname}}/${{katname}}`);
+  }
+
+  updateWorkStatus(idrad,data) {
+    return http.put(`workstatus/${{idrad}}`, data);
+  }
+
+  updateWorkAcceptance(idrad,ocjena,data) {
+    return http.put(`workacceptance/${{idrad}}/${{ocjena}}`, data);
+  }
 /*
   getAllFull() {
     return http.get("/tutorialsfull");
