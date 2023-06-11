@@ -22,7 +22,7 @@
       </div>
     </div>
     <h4 class="h4w">Popis radova gdje imam mentorstvo:</h4>
-    <table class="table table-striped tblfont">    
+    <table class="table table-striped tblfont tblduz">    
       <tr>
         <th>Id</th>
         <th>Naziv rada</th>
@@ -63,13 +63,15 @@
             ne
         </td>
         <td> 
-          {{rad.StatusRada}}       
+          {{rad.StatusRada}}
+        <br>
+          <a v-if="rad.StatusRada=='Prijavljen'" v-bind:href="'/workstatus/' + + rad.idrad + '/'+rad.nazivrad+ '/'+rad.AutorRada+ '/'+rad.KategorijaRada"> Stavi u obradu </a>       
         </td>
         <td> 
           {{rad.AutorRada}}       
         </td>
         <td> 
-          {{rad.Ocjena}}       
+          {{rad.FinalOcjena}}       
         </td>
         <td>
           <a v-bind:href="'/workmentors/' + rad.idrad + '/'+rad.nazivrad"> Pogledaj </a>
@@ -83,7 +85,7 @@
       </tr>
     </table>
     
-    <a v-bind:href="'/addwork'" class="m-3 btn btn-sm btn-primary"> Novi rad </a>
+    <!-- <a v-bind:href="'/addwork'" class="m-3 btn btn-sm btn-primary"> Novi rad </a> -->
   </div>
 </template>
 
@@ -192,5 +194,9 @@ export default {
 
 .h4w{
   width: 100% !important;
+}
+
+.tblduz{
+    width: 1340px !important;
 }
 </style>

@@ -43,7 +43,17 @@
         <td colspan="2" align="right">Prosjek: </td>
         <td>{{ this.totalSum()}}</td>
       </tr>
+      <tr>
+        <td colspan="3" v-if="parseInt(totalOcjene())<3">
+            <button @click="AcceptWork" class="btn btn-success" disabled>Potvrdi rad</button>
+        </td>
+        <td colspan="3" v-else>
+            <button @click="AcceptWork" class="btn btn-success">Potvrdi rad</button>
+        </td>
+      </tr>
     </table>
+    <!-- <input type="hidden" name="RadId" id="RadId" v-model="RadId"/>
+    <input type="hidden" name="Ocjena" id="Ocjena" v-model="Ocjena"/> -->
     
     <a v-bind:href="'#'" @click="nazat" class="m-3 btn btn-sm btn-primary"> Natrag </a>
   </div>
@@ -58,6 +68,8 @@ export default {
     return {
       mentorirada: [],
       idrad:'',
+      RadId:'',
+      Ocjena:'',
       radname:'',
       sumaocjena:0
     };
@@ -75,6 +87,24 @@ export default {
           console.log(e);
         });
     },
+    AcceptWork(){
+        console.log("RadIdAccept_: " + this.RadId)
+      var data = {
+        RadId: this.$route.params.idrad,
+        Ocjena: this.totalSum()
+      };
+
+      UsersDataService.updateWorkAcceptance(this.RadId,this.Ocjena,data)
+        .then(response => {
+          //this.user.id = response.data.id;
+          console.log(response.data);
+          this.submitted = true;
+          this.$router.push({ name: "radovimentor" });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     totalSum(){
         var suma=0;
         for(var i=0;i<this.mentorirada.length;i++){
@@ -84,6 +114,17 @@ export default {
             suma+=parseFloat(this.mentorirada[i].ocjena);
         }
         return (suma/this.mentorirada.length).toFixed(2);
+    },
+    totalOcjene(){
+        var brojac=0;
+        for(var i=0;i<this.mentorirada.length;i++){
+            if(this.mentorirada[i].ocjena != null && this.mentorirada[i].ocjena !=0){
+                brojac++;
+            }
+            
+        }
+        console.log("total ocjene"+brojac);
+        return brojac;
     },
     nazat(){
         history.back(-1);
