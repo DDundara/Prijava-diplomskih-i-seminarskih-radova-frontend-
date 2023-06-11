@@ -99,6 +99,11 @@ const routes =  [
     component: () => import("./components/WorkGrade")
   },
   {
+    path: "/workstatus/:idrad/:radname/:autname/:katname",
+    name: "workstatus-details",
+    component: () => import("./components/WorkStatus")
+  },
+  {
     path: "/workmentors/:idrad/:radname",
     name: "workmentors-details",
     component: () => import("./components/MentoriRada")
