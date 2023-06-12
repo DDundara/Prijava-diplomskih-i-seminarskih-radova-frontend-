@@ -63,6 +63,10 @@ class UsersDataService {
     return http.get("/radovimentor/"+username);
   }
 
+  getRadoviMentorPretraga(username,datumod,datumdo) {
+    return http.get(`/radovimentorpretraga/${username}?datumod=${datumod}+&datumdo=${datumdo}`);
+  }
+
   getUsersTotal() {
     return http.get("/userstotal");
   }
@@ -114,6 +118,14 @@ class UsersDataService {
 
   updateWorkAcceptance(idrad,ocjena,data) {
     return http.put(`workacceptance/${{idrad}}/${{ocjena}}`, data);
+  }
+
+  isWorkAccepted(idrad) {
+    return http.get("isworkaccepted/"+idrad);
+  }
+
+  prosjekOcjenaPoKategoriji() {
+    return http.get("/prosjekocjenapokategoriji");
   }
 /*
   getAllFull() {
