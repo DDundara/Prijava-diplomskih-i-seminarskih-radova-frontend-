@@ -67,7 +67,17 @@ const routes =  [
     path: "/radovimentor",
     name: "radovimentor",
     component: () => import("./components/MentorRadovi")
-  },        
+  },
+  {
+    path: "/radovimentorpretraga",
+    name: "radovimentorpretraga",
+    component: () => import("./components/MentorRadoviPretraga")
+  },
+  {
+    path: "/prosjekocjenapokategoriji",
+    name: "prosjekocjenapokategoriji",
+    component: () => import("./components/ProsjekOcjenaPoKategoriji")
+  },           
   {
     path: "/adduser",
     name: "adduser",
