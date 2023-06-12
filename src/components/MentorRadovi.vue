@@ -85,7 +85,7 @@
       </tr>
     </table>
     
-    <!-- <a v-bind:href="'/addwork'" class="m-3 btn btn-sm btn-primary"> Novi rad </a> -->
+    <a v-bind:href="'/radovimentorpretraga'" class="m-3 btn btn-sm btn-primary"> Pretraga po datumu </a>
   </div>
 </template>
 

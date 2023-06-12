@@ -47,8 +47,11 @@
         <td colspan="3" v-if="parseInt(totalOcjene())<3">
             <button @click="AcceptWork" class="btn btn-success" disabled>Potvrdi rad</button>
         </td>
-        <td colspan="3" v-else>
+        <td colspan="3" v-else-if="parseInt(totalOcjene())==3 && (this.OcjenaAccepted == null || this.OcjenaAccepted == 0)">
             <button @click="AcceptWork" class="btn btn-success">Potvrdi rad</button>
+        </td>
+        <td colspan="3" v-else>
+            <button @click="'#'" class="btn btn-success" disabled>Rad potvrđen</button>
         </td>
       </tr>
     </table>
@@ -67,9 +70,11 @@ export default {
   data() {
     return {
       mentorirada: [],
+      workaccepted: [],
       idrad:'',
       RadId:'',
       Ocjena:'',
+      OcjenaAccepted:'',
       radname:'',
       sumaocjena:0
     };
@@ -82,6 +87,19 @@ export default {
           this.mentorirada = response.data;
           this.radname = radname;
           console.log("mentori"+response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    CurrentWorkAccepted(idrad){
+        console.log("Id rad idem: "+idrad);
+        UsersDataService.isWorkAccepted(idrad)
+        .then(resp => {
+          this.workaccepted = resp.data;
+          this.OcjenaAccepted = this.workaccepted[0].ocjena;
+          console.log("Ocjena acc: "+resp.data);
+          console.log("Ocjena real: "+this.OcjenaAccepted);
         })
         .catch(e => {
           console.log(e);
@@ -132,6 +150,7 @@ export default {
   },
   mounted() {
     this.vratiMentoreRada(this.$route.params.idrad,this.$route.params.radname);
+    this.CurrentWorkAccepted(this.$route.params.idrad);
     //this.vratiMentoreRada(rad.idrad);
   }
 };
