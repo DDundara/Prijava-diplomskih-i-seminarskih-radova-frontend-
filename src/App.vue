@@ -1,40 +1,31 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <router-link to="/" class="navbar-brand">TečajeviApp</router-link>
+      <router-link to="/" class="navbar-brand">SD radovi</router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link to="/home" class="nav-link">Home</router-link>
-        </li>
-        <!-- <li class="nav-item">
-          <router-link to="/tutorials" class="nav-link">Tečajevi</router-link>
-        </li> -->
-        <!-- <li class="nav-item">
-          <router-link to="/tutorialsfull" class="nav-link">Svi tečajevi</router-link>
-        </li> -->
-        <!-- <li class="nav-item">
-          <router-link to="/students" class="nav-link">Studenti</router-link>
-        </li> -->
-        <!-- <li class="nav-item">
-          <router-link to="/add" class="nav-link">Dodaj tečaj</router-link>
-        </li> -->
-        <!-- <li class="nav-item">
-          <router-link to="/dvorane" class="nav-link">Dvorane</router-link>
-        </li> -->
-        <li class="nav-item">
-          <router-link to="/users" class="nav-link">Korisnici (pretraga)</router-link>
+          <router-link to="/home" class="nav-link">Početna</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/usersperpage/1" class="nav-link">Korisnici (stranice)</router-link>
+          <router-link to="/users" class="nav-link" v-if="username && grupa=='administrator'">Korisnici (pretraga i sort)</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/usersandcities" class="nav-link">Korisnici (gradovi)</router-link>
+          <router-link to="/usersperpage/1" class="nav-link" v-if="username && grupa=='administrator'">Korisnici (stranice)</router-link>
+        </li>
+        <li class="nav-item" v-if="username && grupa=='administrator'">
+          <router-link to="/kategorijesve" class="nav-link">Kategorije</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/prosjekocjenapokategoriji" class="nav-link" v-if="username">Prosjek (po kategoriji)</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/mojiradovi" class="nav-link" v-if="username && grupa=='korisnik'">Moji radovi</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/radovimentor" class="nav-link" v-if="username && grupa=='moderator'">Mentorstvo</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/radoviadmin/1" class="nav-link" v-if="username && grupa=='administrator'">Svi radovi</router-link>
         </li>
         <!-- <li class="nav-item">
           <router-link to="/sortingdata" class="nav-link">Sort</router-link>
