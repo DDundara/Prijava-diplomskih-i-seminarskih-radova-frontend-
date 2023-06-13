@@ -59,6 +59,31 @@ const routes =  [
     component: () => import("./components/UsersAndCities")
   },
   {
+    path: "/dodajkategoriju",
+    name: "dodajkategoriju",
+    component: () => import("./components/KategorijaAdd")
+  },
+  {
+    path: "/azurirajkategoriju/:idkat",
+    name: "azurirajkategoriju",
+    component: () => import("./components/KategorijaEdit")
+  },
+  {
+    path: "/kategorijesve",
+    name: "kategorijesve",
+    component: () => import("./components/KategorijeSve")
+  },
+  {
+    path: "/kategorijementori/:idkat/:katname",
+    name: "kategorijementori",
+    component: () => import("./components/KategorijeMentori")
+  },
+  {
+    path: "/dodajmentorekategorije/:idkat/:katname",
+    name: "dodajmentorekategorije",
+    component: () => import("./components/KategorijaMentoriAdd")
+  },
+  {
     path: "/mojiradovi",
     name: "mojiradovi",
     component: () => import("./components/MojiRadovi")
@@ -67,6 +92,16 @@ const routes =  [
     path: "/radovimentor",
     name: "radovimentor",
     component: () => import("./components/MentorRadovi")
+  },
+  {
+    path: "/radoviadmin/:page",
+    name: "radoviadmin",
+    component: () => import("./components/AdminSviRadovi")
+  },
+  {
+    path: "/radoviadminpretraga",
+    name: "radoviadminpretraga",
+    component: () => import("./components/AdminRadoviPretraga")
   },
   {
     path: "/radovimentorpretraga",
