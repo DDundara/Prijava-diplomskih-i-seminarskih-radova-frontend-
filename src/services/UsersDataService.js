@@ -22,11 +22,11 @@ class UsersDataService {
   }
 
   getWorkForEdit(idr,radname,idk,katname) {
-    return http.get(`/workedit/${idr}/${{radname}}/${{idk}}/${{katname}}`);
+    return http.get(`/workedit/${idr}/${radname}/${idk}/${katname}`);
   }
 
   getWorkForGrade(idr,radname,autname,katname) {
-    return http.get(`/workgrade/${idr}/${{radname}}/${{autname}}/${{katname}}`);
+    return http.get(`/workgrade/${idr}/${radname}/${autname}/${katname}`);
   }
   
   getMentoriByKategorija(idkat,iduser) {
@@ -81,7 +81,7 @@ class UsersDataService {
   }
 
   updateWorkGrade(username,data) {
-    return http.put(`radovimentor/${{username}}`, data);
+    return http.put(`radovimentor/${username}`, data);
   }
   
   delete(id) {
@@ -109,15 +109,15 @@ class UsersDataService {
   }
 
   getWorkForChangeStatus(idr,radname,autname,katname) {
-    return http.get(`/workstatus/${idr}/${{radname}}/${{autname}}/${{katname}}`);
+    return http.get(`/workstatus/${idr}/${radname}/${autname}/${katname}`);
   }
 
   updateWorkStatus(idrad,data) {
-    return http.put(`workstatus/${{idrad}}`, data);
+    return http.put(`workstatus/${idrad}`, data);
   }
 
   updateWorkAcceptance(idrad,ocjena,data) {
-    return http.put(`workacceptance/${{idrad}}/${{ocjena}}`, data);
+    return http.put(`workacceptance/${idrad}/${ocjena}`, data);
   }
 
   isWorkAccepted(idrad) {
@@ -127,11 +127,62 @@ class UsersDataService {
   prosjekOcjenaPoKategoriji() {
     return http.get("/prosjekocjenapokategoriji");
   }
-/*
-  getAllFull() {
-    return http.get("/tutorialsfull");
+
+  
+  prikaziSveKategorije() {
+    return http.get("/kategorijesve");
   }
 
+  prikaziMentoreKategorije(idkat,katname) {
+    return http.get(`/kategorijementori/${idkat}/${katname}`);
+  }
+
+  createKategorija(data) {
+    return http.post("/kategorijesve", data);
+  }
+
+  getAllMentori() {
+    return http.get("/svimentori");
+  }
+
+  getAllMentoriForAdd(idkat,katname) {
+    return http.get(`/svimentoriadd/${idkat}/${katname}`);
+  }
+
+  createKategorijaMentor(data) {
+    return http.post("/kategorijementorialljoin",data);
+  }
+
+  removeMentorFromCategory(idzapis) {
+    return http.delete(`/kategorijesve/${idzapis}`);
+  }
+
+  retrieveKategorijaDetails(idkat){
+      return http.get(`/azurirajkategoriju/${idkat}`);
+
+  }
+
+  updateKategorija(idkat,data) {
+    return http.put(`/kategorijesve/${idkat}`, data);
+  }
+
+  getAdminSviRadovi(page) {
+    return http.get("/radoviadmin/"+page);
+  }
+
+  getRadoviAdminPretraga(datumod,datumdo) {
+    return http.get(`/radoviadminpretraga?datumod=${datumod}+&datumdo=${datumdo}`);
+  }
+
+  getRadoviTotal() {
+    return http.get("/radovitotal");
+  }
+
+  deleteWork(idrad) {
+    return http.delete(`/radovitotal?idrad=${idrad}`);
+  }
+
+/*
   get(id) {
     return http.get(`/tutorials/${id}`);
   }
