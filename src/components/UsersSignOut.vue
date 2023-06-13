@@ -23,8 +23,10 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
-      //this.$router.push('/');
-      window.location="/";
+      //this.$router.push('/home');
+      //location.reload();
+      //this.$router.go();
+      window.location="/home";
     }
   }
 };

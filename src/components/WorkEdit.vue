@@ -36,7 +36,7 @@
 
       <div class="form-group">
         <label for="grad">Mentor</label>
-        <select name="mentor" id="mentor" class="form-control" v-model="MentorId">
+        <select name="mentor" id="mentor" class="form-control" v-model="MentorId" >
           <option value="0" selected disabled>Izaberi</option>
           <option v-for="mentor in mentori" :key="mentor.id" :value="mentor.id">{{mentor.name}}</option>
         </select>
@@ -54,7 +54,8 @@
         />
       </div> -->
 
-      <button @click="AddMentor" class="btn btn-success">Spremi</button>
+      <button v-if="parseInt(mentori.length)==0" disabled class="btn btn-success">Već su dodani mentori</button>
+      <button v-else @click="AddMentor" class="btn btn-success">Spremi</button>
   </div>
 </template>
 
@@ -111,29 +112,6 @@ export default {
         this.secretMessage = await AuthService.getSecretContent();
       }
     },
-    
-    // retrieveUserDetails(id) {
-    //   UsersDataService.getUserForEdit(id)
-    //     .then(response => {
-    //       this.currentUser = response.data;
-    //       console.log(response.data);
-    //       console.log("Returned:" +response.data);
-          
-    //     })
-    //     .catch(e => {
-    //       console.log(e);
-    //     });
-    // },
-    // retrieveCities() {
-    //   UsersDataService.getAllCities()
-    //     .then(response => {
-    //       this.cities = response.data;
-    //       console.log(response.data);
-    //     })
-    //     .catch(e => {
-    //       console.log(e);
-    //     });
-    // },
     retrieveParams(idr,rname,idk,kname){
         this.RadId=idr;
         this.RadName=rname;
@@ -158,9 +136,6 @@ export default {
     },
   },
   mounted(){
-    //this.retrieveUserDetails(this.$route.params.id);
-    //this.retrieveCities();
-    //console.log("Name: "+this.currentUser.name);
     this.retrieveParams(this.$route.params.idrad,this.$route.params.radname,this.$route.params.idkat,this.$route.params.katname);
     this.retrieveMetnorsByCategory(this.$route.params.idkat,this.userid);
   }

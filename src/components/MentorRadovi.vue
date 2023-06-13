@@ -65,7 +65,7 @@
         <td> 
           {{rad.StatusRada}}
         <br>
-          <a v-if="rad.StatusRada=='Prijavljen'" v-bind:href="'/workstatus/' + + rad.idrad + '/'+rad.nazivrad+ '/'+rad.AutorRada+ '/'+rad.KategorijaRada"> Stavi u obradu </a>       
+          <a v-if="rad.StatusRada=='Prijavljen'" v-bind:href="'/workstatus/' + rad.idrad + '/'+rad.nazivrad+ '/'+rad.AutorRada+ '/'+rad.KategorijaRada"> Promjeni status </a>       
         </td>
         <td> 
           {{rad.AutorRada}}       
@@ -77,7 +77,10 @@
           <a v-bind:href="'/workmentors/' + rad.idrad + '/'+rad.nazivrad"> Pogledaj </a>
         </td>
         <td v-if="rad.RadOcjena == null">
-            <a v-bind:href="'/workgrade/' + rad.idrad + '/'+rad.nazivrad+ '/'+rad.AutorRada+ '/'+rad.KategorijaRada"> Ocjeni </a>
+            <a v-if="rad.StatusRada=='U obradi'" v-bind:href="'/workgrade/' + rad.idrad + '/'+rad.nazivrad+ '/'+rad.AutorRada+ '/'+rad.KategorijaRada"> Ocjeni </a>
+            <a v-else-if="rad.StatusRada=='Prihvacen'" v-bind:href="'#'"> Rad ocijenjen </a>
+            <a v-else-if="rad.StatusRada=='Prijavljen'" v-bind:href="'#'"> Rad prijavljen </a>
+            <a v-else v-bind:href="'#'"> Rad odbijen </a>
         </td>
         <td v-else>
             Rad ocijenjen

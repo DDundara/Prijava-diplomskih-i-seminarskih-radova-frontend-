@@ -111,6 +111,10 @@ export default {
         RadId: this.$route.params.idrad,
         Ocjena: this.totalSum()
       };
+      console.log("Acc idrad "+this.$route.params.idrad);
+      console.log("Acc ocjena "+this.totalSum());
+      this.RadId=this.$route.params.idrad;
+      this.Ocjena=this.totalSum();
 
       UsersDataService.updateWorkAcceptance(this.RadId,this.Ocjena,data)
         .then(response => {

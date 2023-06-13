@@ -46,9 +46,9 @@
 
       <div class="form-group">
         <label for="grad">Status</label>
-        <select name="status" id="status" class="form-control" v-model="StatusId">
+        <select name="StatusId" id="StatusId" class="form-control" v-model="StatusId">
           <option value="0" selected disabled>Izaberi</option>
-          <option v-for="st in statusi" :key="st.id" :value="st.id">{{st.nazivstatus}}</option>
+          <option v-for="st in statusi" :key="st.idstatus" :value="st.idstatus">{{st.nazivstatus}}</option>
         </select>
       </div>
 
@@ -59,6 +59,7 @@
 
 <script>
 import UsersDataService from "../services/UsersDataService";
+import AuthService from '@/services/AuthService.js';
 export default {
   name: "add-mentorstvo",
   data() {
@@ -67,15 +68,25 @@ export default {
       RadId:'',
       RadName:'',
       AutorName:'',
+      StatusId:'',
       KatName:'',
+      secretMessage: '',
+      username: '',
+      grupa: '',
       submitted: false
     };
+  },
+  async created() {
+      this.loggedin();
+    
   },
   methods: {
     UpdateWorkStatus() {
       console.log("RadId_: " + this.RadId)
+      console.log("StatId_: " + this.StatusId)
       var data = {
-        RadId: this.RadId
+        RadId: this.RadId,
+        StatusId: this.StatusId
       };
 
       UsersDataService.updateWorkStatus(this.RadId,data)
@@ -83,12 +94,30 @@ export default {
           //this.user.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
-          this.$router.push({ name: "radovimentor" });
+          if(this.grupa=="administrator"){
+            //this.$router.push({ name: "radoviadmin" });
+            this.$router.push({ name: "radoviadmin",params: {page: 1}});
+          }
+          else
+          {
+            this.$router.push({ name: "radovimentor" });
+          }
+          
         })
         .catch(e => {
           console.log(e);
         });
     },  
+    async loggedin(){
+      console.log("Local storage 1: "+localStorage.getItem("loggeduser"))
+      console.log("Local storage 2: "+localStorage.getItem("loggedusergroup"))
+      if (localStorage.getItem("loggeduser") !== null) {
+        this.username = localStorage.getItem("loggeduser");
+        this.userid = localStorage.getItem("loggeduserid");
+        this.grupa = localStorage.getItem("loggedusergroup");
+        this.secretMessage = await AuthService.getSecretContent();
+      }
+    },
     Cancel(){
         this.$router.push({ name: "radovimentor" });
     },

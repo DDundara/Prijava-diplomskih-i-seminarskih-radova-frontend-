@@ -2,23 +2,23 @@
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Pretraga po imenu"
-          v-model="ime"/>
+        <!-- <input type="text" class="form-control" placeholder="Pretraga po imenu"
+          v-model="ime"/> -->
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button"
+          <!-- <button class="btn btn-outline-secondary" type="button"
             @click="searchName"
           >
             Search
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
-
+    <h4 class="h4w">Popis usera</h4>
     <table class="table table-striped">
-      <h4>Popis usera</h4>
+      
       <tr>
         <th>Id</th>
-        <th>Name</th>
+        <th>Ime i prezime</th>
         <th>E-mail</th>
         <th>Grad</th>
         <th>Spol</th>
@@ -62,7 +62,7 @@
 </div>
 <p>&nbsp;</p>
 <div class="newline">
-  <a v-bind:href="'/adduser'" class="m-3 btn btn-sm btn-primary"> Add new </a></div>
+  <a v-bind:href="'/signup'" class="m-3 btn btn-sm btn-primary"> Add new </a></div>
   </div>
 </template>
 
@@ -105,37 +105,11 @@ export default {
           console.log(e);
         });
     }
-    // vrati(pg){
-    //   alert("st: "+pg)
-    // },
-    // reloadPage() {
-    //   //window.location.reload();
-    // },
-    // nthIndex(){
-    //     var str=String(window.location);
-    //     var pat="/";
-    //     var n = 4;
-    //     var L= str.length, i= -1;
-        
-    //     while(n-- && i++<L){
-    //         i= str.indexOf(pat, i);
-    //         if (i < 0) break;
-    //     }
-    //     var strana = str.substring(i+1,str.length)
-    //     return parseInt(strana);
-    // }
-
     
   },
   mounted() {
     this.retrieveUsers(this.$route.params.page);
     this.retrieveTotalCountOfUsers();
-    
-    // var lokacija = String(window.location);
-    // console.log("Lokacija: "+lokacija)
-    // var poz = this.nthIndex()
-    // console.log("Poz: "+poz)
-    //console.log("Duljina: "+lokacija.length)
     console.log("Stranica: "+this.$route.params.page)
   }
 };
@@ -173,4 +147,9 @@ export default {
   margin-top: 50px;
     margin-left: -143px;
 }
+
+.h4w{
+  width: 100% !important;
+}
+
 </style>
