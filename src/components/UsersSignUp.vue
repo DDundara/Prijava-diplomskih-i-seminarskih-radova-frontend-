@@ -1,9 +1,10 @@
 <template>
   <div class="submit-form">
-    <div v-if="!submitted">
+    <h3>Unos novog korisnika</h3>
+    <div>
 
       <div class="form-group frmgroup_resize">
-        <label for="name">Name</label>
+        <label for="name">Ime i prezime</label>
         <input
           type="text"
           class="form-control frmcontr"
@@ -15,7 +16,7 @@
       </div>
 
       <div class="form-group frmgroup_resize">
-        <label for="name">Username</label>
+        <label for="name">Korisničko ime</label>
         <input
           type="text"
           class="form-control frmcontr"
@@ -27,7 +28,7 @@
       </div>
 
       <div class="form-group frmgroup_resize">
-        <label for="email">Password</label>
+        <label for="email">Lozinka</label>
         <input
           class="form-control frmcontr"
           id="password"
@@ -39,7 +40,7 @@
       </div> 
       
       <div class="form-group frmgroup_resize">
-        <label for="email">Password repeat</label>
+        <label for="email">Lozinka ponovno</label>
         <input
           class="form-control frmcontr"
           id="password_repeat"
@@ -71,10 +72,22 @@
 
       <div class="form-group frmgroup_resize">
         <label for="grad">Grad</label>
-        <select name="gradid" id="gradid" class="form-control frmcontr" v-model="gradid">
+        <select name="gradid" id="gradid" class="form-control frmcontr" v-model="gradid" @change="PrikaziNovi">
           <option value="0" selected disabled>Izaberi</option>
           <option v-for="city in cities" :key="city.id" :value="city.id">{{city.naziv}}</option>
+          <option value="new">Novi</option>
         </select>
+      </div>
+
+      <div class="form-group frmgroup_resize hiddencity" id="newcity">
+        <label for="novigrad">Novi grad</label>
+        <input
+          class="form-control frmcontr"
+          id="novigrad"
+          required
+          v-model="novigrad"
+          name="novigrad"
+        />
       </div>
 
       <div class="form-group frmgroup_resize">
@@ -86,25 +99,20 @@
       </div>
 
       <button @click="signUp" class="btn btn-success">Sign up</button>
-      <!-- <p v-if="msg">{{ msg }}</p> -->
-      <p v-if="errors.length">
-        <b>Please correct the following error(s):</b>
+
+      <p v-if="errors.length" class="greskerazmak">
+        <b>Ispravite sljedeće greške:</b>
         <ul>
-         <li v-for="err in errors" :key="err.key">{{ err }}</li>
+         <li class="greskeboja" v-for="err in errors" :key="err.key">{{ err }}</li>
         </ul>
       </p>
-    </div>
-
-    <div v-else>
-      <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="signUp">Sign up</button>
     </div>
   </div>
 </template>
 
 <script>
 import AuthService from '@/services/AuthService.js';
-
+// import UsersDataService from "../services/UsersDataService";
 export default {
   data() {
     return {
@@ -114,8 +122,11 @@ export default {
       password_repeat: '',
       email:'',
       spol:'',
+      novigrad:'',
       msg: '',
       gradid: '',
+      nazivnovigrad:'',
+      novigradid:'',
       grupaid: '',
       spolovi: [
         {key:'M',value:'Muški'},
@@ -128,6 +139,7 @@ export default {
   },
   methods: {
     async signUp() {
+      //console.log("novi idddd:" + await this.UnosNoviGrad());
       try {
         const credentials = {
           name: this.name,
@@ -137,48 +149,43 @@ export default {
           email: this.email,
           spol:this.spol,
           gradid:this.gradid,
+          novigrad:this.novigrad,
           grupaid:this.grupaid
         };
 
         this.errors = [];
 
         if (!this.name) {
-        this.errors.push('Name required.');
+        this.errors.push('Ime i prezime je obavezno!');
         }
         if (!this.username) {
-        this.errors.push('Username required.');
+        this.errors.push('Korisničko ime je obavezno!');
         }
 
         if (!this.password) {
-        this.errors.push('Password required.');
+        this.errors.push('Prva lozinka obavezna!');
         }
 
         if (!this.password_repeat) {
-        this.errors.push('Password repeat required.');
+        this.errors.push('Druga lozinka obavezna!');
         }
 
         if (this.password != this.password_repeat) {
-        this.errors.push('Passwords must be the same!');
+        this.errors.push('Lozinke moraju biti iste!');
         }
 
         if (!this.email) {
-        this.errors.push('E-mail required.');
+        this.errors.push('E-mail je obavezan.');
         }
 
         if (!this.spol) {
-        this.errors.push('Gender required.');
+        this.errors.push('Spol je obavezan!');
         }
 
         if (!this.gradid || this.gradid==0) {
-        this.errors.push('Grad required.');
+        this.errors.push('Grad je obavezan izbor!');
         }
 
-        // if(this.errors.length==0){
-        //   return true;
-        // }
-
-
-        //console.log("errors:"+this.errors[0]);
         if(this.errors.length==0){
         const response = await AuthService.signUp(credentials);
         this.msg = response.msg;
@@ -199,6 +206,13 @@ export default {
         .catch(e => {
           console.log(e);
         });
+    },
+    PrikaziNovi(){
+        var novi = document.getElementById("gradid");
+        console.log("Novi: "+novi.value)
+        if(novi.value=='new'){
+          document.getElementById("newcity").style.display='block';
+        }
     },
     retrieveGroups() {
       AuthService.getallgroups()
@@ -227,11 +241,9 @@ export default {
   margin: auto;
 }
 
-.frmgroup_resize{
-  font-size: 12px;
+#newcity{
+  display: none;
 }
 
-.frmcontr{
-  font-size: 12px !important;
-}
+
 </style>
