@@ -42,17 +42,6 @@
         </select>
       </div>
 
-      <!-- <div class="form-group">
-        <label for="name">Ocjena</label>
-        <input
-          type="text"
-          class="form-control"
-          id="Ocjena"
-          required
-          v-model="Ocjena"
-          name="Ocjena"
-        />
-      </div> -->
 
       <button v-if="parseInt(mentori.length)==0" disabled class="btn btn-success">Već su dodani mentori</button>
       <button v-else @click="AddMentor" class="btn btn-success">Spremi</button>
@@ -94,7 +83,6 @@ export default {
 
       UsersDataService.createMentorRad(data)
         .then(response => {
-          //this.user.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
           this.$router.push({ name: "mojiradovi" });

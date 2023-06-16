@@ -1,17 +1,6 @@
 <template>
   <div v-if="currentUser" class="submit-form">
     <h4>Current user</h4>
-      <!-- <div class="form-group">
-        <label for="id">Id</label>
-        <input
-          type="text"
-          class="form-control"
-          id="id"
-          required
-          v-model="user.id"
-          name="id"
-        />
-      </div> -->
 
       <div class="form-group">
         <label for="name">Name</label>
@@ -45,13 +34,21 @@
         </select>
       </div>
 
+      <div class="form-group">
+        <label for="grupa">Grupa</label>
+        <select name="grupaid" id="grupaid" class="form-control frmcontr" v-model="currentUser[0].groupid">
+          <option value="0" selected disabled>Izaberi</option>
+          <option v-for="group in groups" :key="group.idgroup" :value="group.idgroup">{{group.naziv}}</option>
+        </select>
+      </div>
+
       <button @click="updateUser" class="btn btn-success">Update</button>
   </div>
 </template>
 
 <script>
 import UsersDataService from "../services/UsersDataService";
-
+import AuthService from '@/services/AuthService.js';
 export default {
   name: "add-user",
   data() {
@@ -61,13 +58,7 @@ export default {
         {key:'Z',value:'Ženski'}
       ],
       cities: [],
-      // user: {
-      //   id: "",
-      //   name: "",
-      //   email: "",
-      //   spol: "",
-      //   gradid: null
-      // },
+      groups: [],
       currentUser: null,
       submitted: false
     };
@@ -84,12 +75,12 @@ export default {
         name: this.currentUser[0].name,
         email: this.currentUser[0].email,
         spol: this.currentUser[0].spol,
-        gradid: this.currentUser[0].gradid
+        gradid: this.currentUser[0].gradid,
+        groupid: this.currentUser[0].groupid
       };
 
       UsersDataService.update(this.currentUser[0].id,data)
         .then(response => {
-          //this.user.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
           this.$router.push({ name: "usersandcities" });
@@ -111,6 +102,17 @@ export default {
           console.log(e);
         });
     },
+    retrieveGroups() {
+      AuthService.getallgroups()
+        .then(response => {
+          this.groups = response.data;
+          console.log("resp:"+response.data);
+          console.log("groups:"+this.groups);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     retrieveCities() {
       UsersDataService.getAllCities()
         .then(response => {
@@ -125,7 +127,7 @@ export default {
   mounted(){
     this.retrieveUserDetails(this.$route.params.id);
     this.retrieveCities();
-    //console.log("Name: "+this.currentUser.name);
+    this.retrieveGroups();
   }
 };
 </script>

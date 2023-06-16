@@ -1,12 +1,5 @@
 <template>
-    <!-- <div v-if="username">
-    <h1>Hi {{ username }}</h1>
-    <p>{{ secretMessage }}</p>
-    <input type="button" value="Logout" @click="logout" />
-  </div>
-  <div v-else>
-    <h1>Niste prijavljeni!</h1>
-  </div> -->
+
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
@@ -72,10 +65,7 @@ export default {
       users: []
     };
   },
-  // async created() {
-  //     this.loggedin();
-    
-  // },
+
   methods: {
     retrieveUsers() {
       UsersDataService.getAllUsersAndCities()
@@ -87,17 +77,7 @@ export default {
           console.log(e);
         });
     }
-    // logout() {
-    //   localStorage.clear();
-    //   this.$router.push('/login');
-    // },
-    // async loggedin(){
-    //   console.log("Local storage: "+localStorage.getItem("loggeduser"))
-    //   if (localStorage.getItem("loggeduser") !== null) {
-    //     this.username = localStorage.getItem("loggeduser");
-    //     this.secretMessage = await AuthService.getSecretContent();
-    //   }
-    // }
+
     
   },
   mounted() {

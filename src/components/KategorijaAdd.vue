@@ -27,11 +27,12 @@
 
       <button @click="saveKategorija" class="btn btn-success">Dodaj</button>
     </div>
-
-    <div v-else>
-      <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="newUser">Add</button>
-    </div>
+    <p v-if="errors.length" class="greskerazmak">
+        <b>Ispravite sljedeće greške:</b>
+        <ul>
+         <li class="greskeboja" v-for="err in errors" :key="err.key">{{ err }} </li>
+        </ul>
+      </p>
   </div>
 </template>
 
@@ -47,7 +48,9 @@ export default {
         idkat: "",
         nazivkat: "",
         moderatorid: ""
+        
       },
+      errors: [],
       submitted: false
     };
   },
@@ -62,6 +65,20 @@ export default {
         moderatorid: this.kategorija.moderatorid
       };
 
+      this.errors = [];
+
+      if (!this.kategorija.nazivkat) {
+        this.errors.push('Naziv kategorije je prazan!');
+        }
+
+        if (!this.kategorija.moderatorid) {
+        this.errors.push('Morate odabrati moderatora!');
+        }
+
+        console.log("Errori: "+this.errors.length)
+        console.log("Errori: "+this.errors)
+
+        if(this.errors.length==0){
       UsersDataService.createKategorija(data)
         .then(response => {
           console.log(response.data);
@@ -71,6 +88,7 @@ export default {
         .catch(e => {
           console.log(e);
         });
+      }
     },
     
     retrieveMentors() {
@@ -100,4 +118,6 @@ export default {
   max-width: 300px;
   margin: auto;
 }
+
+
 </style>

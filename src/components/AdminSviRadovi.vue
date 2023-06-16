@@ -64,12 +64,14 @@
         </td>
       </tr>
     </table>
-    <div class="pagination" v-for="page in parseInt(totalPages)" :key="page" v-bind="page">
-     
-    <a v-bind:href="'/radoviadmin/'+page" v:model="page" v-if="page===parseInt(this.$route.params.page)" class="active" >{{ page }}</a>
-    <a v-bind:href="'/radoviadmin/'+page" v:model="page" v-else >{{ page }}</a>
+    <div class="wholepagination">
+      <div class="pagination" v-for="page in parseInt(totalPages)" :key="page" v-bind="page">
+      
+      <a v-bind:href="'/radoviadmin/'+page" v:model="page" v-if="page===parseInt(this.$route.params.page)" class="active" >{{ page }}</a>
+      <a v-bind:href="'/radoviadmin/'+page" v:model="page" v-else >{{ page }}</a>
 
-    </div>
+      </div>
+  </div>
     <div class="newline">
     <a v-bind:href="'/radoviadminpretraga'" class="m-3 btn btn-sm btn-primary"> Pretraga po datumu </a>
   </div>
@@ -189,41 +191,5 @@ export default {
   max-width: 750px;
   margin: auto;
 }
-.tblfont{
-  font-size: 12px;
-}
 
-.h4w{
-  width: 100% !important;
-}
-
-.tblduz{
-    width: 1340px !important;
-}
-
-.pagination {
-  display: inline-block;
-  height: 45px;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
-.newline{
-  display: block;
-  clear: both;
-  margin-top: 50px;
-    margin-left: -143px;
-}
 </style>

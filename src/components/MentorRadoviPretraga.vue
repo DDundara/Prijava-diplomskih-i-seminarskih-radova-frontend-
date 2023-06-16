@@ -1,12 +1,5 @@
 <template>
-    <!-- <div v-if="username">
-    <h1>Hi {{ username }}</h1>
-    <p>{{ secretMessage }}</p>
-    <input type="button" value="Logout" @click="logout" />
-  </div>
-  <div v-else>
-    <h1>Niste prijavljeni!</h1>
-  </div> -->
+
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
@@ -73,8 +66,6 @@
         </td>
       </tr>
     </table>
-    
-    <!-- <a v-bind:href="'/addwork'" class="m-3 btn btn-sm btn-primary"> Novi rad </a> -->
 
   </div>
 </template>
@@ -131,17 +122,6 @@ export default {
           console.log(e);
         });
     },
-    // vratiMentoreRada(idrad) {
-    //   console.log("spec rad"+idrad);
-    //   UsersDataService.getAllMentoriSpecRad(idrad)
-    //     .then(response => {
-    //       this.mentorirada = response.data;
-    //       console.log("mentori"+response.data);
-    //     })
-    //     .catch(e => {
-    //       console.log(e);
-    //     });
-    // },
     async loggedin(){
       console.log("Local storage 1: "+localStorage.getItem("loggeduser"))
       if (localStorage.getItem("loggeduser") !== null) {
@@ -180,7 +160,6 @@ export default {
   },
   mounted() {
     this.vratiRadoveGdjeSamMentor();
-    //this.vratiMentoreRada(rad.idrad);
   }
 };
 </script>

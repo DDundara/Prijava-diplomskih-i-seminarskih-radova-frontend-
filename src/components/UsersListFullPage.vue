@@ -2,14 +2,7 @@
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <!-- <input type="text" class="form-control" placeholder="Pretraga po imenu"
-          v-model="ime"/> -->
         <div class="input-group-append">
-          <!-- <button class="btn btn-outline-secondary" type="button"
-            @click="searchName"
-          >
-            Search
-          </button> -->
         </div>
       </div>
     </div>
@@ -53,7 +46,7 @@
         </td>
       </tr>
     </table>
-<!-- <p>Prije str: {{ this.$route.params.page }}</p> -->
+
 <div class="pagination" v-for="page in parseInt(totalPages)" :key="page" v-bind="page">
 
   <a v-bind:href="'/usersperpage/'+page" v:model="page" v-if="page===parseInt(this.$route.params.page)" class="active" >{{ page }}</a>
@@ -77,7 +70,6 @@ export default {
       totals: [],
       total: null,
       totalPages: null
-      //page: this.nthIndex()
     };
   },
   methods: {
@@ -86,7 +78,7 @@ export default {
         .then(response => {
           this.users = response.data;
           console.log(response.data);
-          //console.log("stranica: "+this.page);
+
         })
         .catch(e => {
           console.log(e);

@@ -46,15 +46,6 @@
         />
       </div>
 
-
-      <!-- <div class="form-group">
-        <label for="grad">Mentor</label>
-        <select name="mentor" id="mentor" class="form-control" v-model="MentorId">
-          <option value="0" selected disabled>Izaberi</option>
-          <option v-for="mentor in mentori" :key="mentor.id" :value="mentor.id">{{mentor.name}}</option>
-        </select>
-      </div> -->
-
       <div class="form-group">
         <label for="name">Ocjena</label>
         <input
@@ -108,7 +99,6 @@ export default {
 
       UsersDataService.updateWorkGrade(this.username,data)
         .then(response => {
-          //this.user.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
           this.$router.push({ name: "radovimentor" });
@@ -138,22 +128,11 @@ export default {
         console.log("IDkat: "+this.AutorName)
         console.log("KatName: "+this.KatName)
     }
-    // retrieveMetnorsByCategory(idkat,iduser) {
-    //     console.log("IDkat2: "+idkat)
-    //     console.log("IDuser2: "+iduser)
-    //   UsersDataService.getMentoriByKategorija(idkat,iduser)
-    //     .then(response => {
-    //       this.mentori = response.data;
-    //       console.log(response.data);
-    //     })
-    //     .catch(e => {
-    //       console.log(e);
-    //     });
-    // },
+
   },
   mounted(){
     this.retrieveParams(this.$route.params.idrad,this.$route.params.radname,this.$route.params.autname,this.$route.params.katname);
-    //this.retrieveMetnorsByCategory(this.$route.params.idkat,this.userid);
+
   }
 };
 </script>

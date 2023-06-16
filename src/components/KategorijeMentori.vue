@@ -28,8 +28,6 @@
         </td>
       </tr>
     </table>
-    <!-- <input type="hidden" name="RadId" id="RadId" v-model="RadId"/>
-    <input type="hidden" name="Ocjena" id="Ocjena" v-model="Ocjena"/> -->
     
     <a v-bind:href="'#'" @click="nazat" class="m-3 btn btn-sm btn-primary"> Natrag </a>
     <a v-if="parseInt(this.mentorikategorije.length)==3" v-bind:href="'#'" class="m-3 btn btn-sm btn-primary disabled"> Mentori dodani (3) </a>
@@ -71,10 +69,8 @@ export default {
       console.log("Zapis: "+idzapis);
       UsersDataService.removeMentorFromCategory(idzapis)
         .then(response => {
-          //this.user.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
-          //({ name: "kategorijementori",params: {idkat: this.idkat, katname: this.katname}});
           this.$router.go();
         })
         .catch(e => {

@@ -1,24 +1,8 @@
 <template>
-    <!-- <div v-if="username">
-    <h1>Hi {{ username }}</h1>
-    <p>{{ secretMessage }}</p>
-    <input type="button" value="Logout" @click="logout" />
-  </div>
-  <div v-else>
-    <h1>Niste prijavljeni!</h1>
-  </div> -->
+
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <!-- <input type="text" class="form-control" placeholder="Pretraga po imenu"
-          v-model="ime"/> -->
-        <!-- <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button"
-            @click="searchName"
-          >
-            Search
-          </button>
-        </div> -->
       </div>
     </div>
     <h4 class="h4w">Popis mentora za rad "{{ this.radname }}"</h4>
@@ -55,8 +39,6 @@
         </td>
       </tr>
     </table>
-    <!-- <input type="hidden" name="RadId" id="RadId" v-model="RadId"/>
-    <input type="hidden" name="Ocjena" id="Ocjena" v-model="Ocjena"/> -->
     
     <a v-bind:href="'#'" @click="nazat" class="m-3 btn btn-sm btn-primary"> Natrag </a>
   </div>
@@ -118,7 +100,6 @@ export default {
 
       UsersDataService.updateWorkAcceptance(this.RadId,this.Ocjena,data)
         .then(response => {
-          //this.user.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
           this.$router.push({ name: "radovimentor" });
@@ -155,7 +136,6 @@ export default {
   mounted() {
     this.vratiMentoreRada(this.$route.params.idrad,this.$route.params.radname);
     this.CurrentWorkAccepted(this.$route.params.idrad);
-    //this.vratiMentoreRada(rad.idrad);
   }
 };
 </script>
@@ -166,11 +146,5 @@ export default {
   max-width: 750px;
   margin: auto;
 }
-.tblfont{
-  font-size: 12px;
-}
 
-.h4w{
-  width: 100% !important;
-}
 </style>

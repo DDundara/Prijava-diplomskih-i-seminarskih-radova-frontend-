@@ -53,7 +53,6 @@ export default {
           console.log(response.data);
           this.submitted = true;
           this.$router.push({ name: "kategorijementori",params: {idkat: this.idkat, katname: this.nazivkat}});
-          //window.location="kategorijementori/"+this.idkat+"/"+this.nazivkat;
         })
         .catch(e => {
           console.log(e);

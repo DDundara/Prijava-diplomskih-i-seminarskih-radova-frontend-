@@ -2,18 +2,6 @@
   <div class="submit-form">
     <div v-if="!submitted">
 
-      <!-- <div class="form-group">
-        <label for="id">Id</label>
-        <input
-          type="text"
-          class="form-control"
-          id="id"
-          required
-          v-model="user.id"
-          name="id"
-        />
-      </div> -->
-
       <div class="form-group">
         <label for="name">Name</label>
         <input
@@ -102,7 +90,6 @@ export default {
 
       UsersDataService.create(data)
         .then(response => {
-          //this.user.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
           this.$router.push({ name: "usersandcities" });

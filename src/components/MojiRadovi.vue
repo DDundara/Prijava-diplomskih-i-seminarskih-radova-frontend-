@@ -1,24 +1,8 @@
 <template>
-    <!-- <div v-if="username">
-    <h1>Hi {{ username }}</h1>
-    <p>{{ secretMessage }}</p>
-    <input type="button" value="Logout" @click="logout" />
-  </div>
-  <div v-else>
-    <h1>Niste prijavljeni!</h1>
-  </div> -->
+
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <!-- <input type="text" class="form-control" placeholder="Pretraga po imenu"
-          v-model="ime"/> -->
-        <!-- <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button"
-            @click="searchName"
-          >
-            Search
-          </button>
-        </div> -->
       </div>
     </div>
     <h4 class="h4w">Popis mojih radova</h4>
@@ -66,12 +50,7 @@
         <td>
           <a v-bind:href="'/workedit/' + rad.idrad + '/'+rad.nazivrad+ '/'+rad.idkat+ '/'+rad.KategorijaRada"> Dodaj </a>
           <a v-bind:href="'/workmentors/' + rad.idrad + '/'+rad.nazivrad"> Pogledaj </a>
-          <!-- <a v-bind:href="'/workedite?idrad=' + rad.idrad"> Odaberi </a> -->
-          <!-- <router-link :to="{ name:'WorkEdit', params: {idrad: rad.idrad}, query: {kateg: rad.KategorijaRada}}"> -->
-          <!-- <router-link :to="{ name: 'WorkEdit', params:{idrad: rad.idrad}}">Klik</router-link> -->
-          <!-- <router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link> -->
-          <!-- {{ this.vratiMentoreRada(rad.idrad) }}   -->
-          <!-- <label v-for="ment in mentorirada" :key="ment.idment">{{ ment.name }}</label> -->
+
         </td>
       </tr>
     </table>
@@ -165,7 +144,6 @@ export default {
   },
   mounted() {
     this.vratiMojeRadove();
-    //this.vratiMentoreRada(rad.idrad);
   }
 };
 </script>

@@ -2,22 +2,10 @@
   <div v-if="currentUser" class="submit-form">
     <h4>Brisanje korisnika</h4>
     <h5 class="text-warning">Jeste li sigurni da želite izbrisati sljedećeg korisnika?</h5>
-      <!-- <div class="form-group">
-        <label for="id">Id</label>
-        <input
-          type="text"
-          class="form-control"
-          id="id"
-          required
-          v-model="user.id"
-          name="id"
-        />
-      </div> -->
 
       <div class="form-group">
         <label for="name">Name</label>
         <label for="nameval" class="form-control">{{currentUser[0].name}}</label>
-        <!-- <input type="text" class="form-control" id="name" required v-model="currentUser[0].name"/> -->
       </div>
 
       <div class="form-group">
@@ -58,13 +46,7 @@ export default {
         {key:'Z',value:'Ženski'}
       ],
       cities: [],
-      // user: {
-      //   id: "",
-      //   name: "",
-      //   email: "",
-      //   spol: "",
-      //   gradid: null
-      // },
+
       currentUser: null,
       submitted: false
     };
@@ -73,7 +55,6 @@ export default {
     deleteUser() {
       UsersDataService.delete(this.currentUser[0].id)
         .then(response => {
-          //this.user.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
           this.$router.push({ name: "usersandcities" });
@@ -112,7 +93,6 @@ export default {
   mounted(){
     this.retrieveUserDetails(this.$route.params.id);
     this.retrieveCities();
-    //console.log("Name: "+this.currentUser.name);
   }
 };
 </script>

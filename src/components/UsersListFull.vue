@@ -18,7 +18,7 @@
       <h4>Popis usera</h4>
       <tr>
         <th @click="sortList('id')" title="Klikni za sort">Id &#8597;</th>
-        <th @click="sortList('name')" title="Klikni za sort">Name &#8597;</th>
+        <th @click="sortList('name')" title="Klikni za sort">Ime i prezime &#8597;</th>
         <th @click="sortList('email')" title="Klikni za sort">E-mail &#8597;</th>
         <th>Spol</th>
       </tr>
@@ -41,16 +41,7 @@
       </tr>
     </table>
 
-<div class="pagination" v-for="n in parseInt(total)" :key="n">
-
-  <a v-bind:href="'/users/'+n" v-if="n===3" class="active">{{ n }}</a>
-  <a v-bind:href="'/users/'+n" v-else>{{ n }}</a>
-
-</div>
-
-<div class="newline">
-  <a v-bind:href="'/adduser'" class="m-3 btn btn-sm btn-primary newline"> Add new </a></div>
-  </div>
+  </div> 
 </template>
 
 <script>
@@ -135,31 +126,5 @@ export default {
   margin: auto;
 }
 
-.pagination {
-  display: inline-block;
-}
 
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
-.newline{
-  display: block;
-  clear: both;
-}
-
-.razmak{
-  margin-left: 10px;
-  background-color: burlywood;
-}
 </style>

@@ -35,13 +35,6 @@ export default {
   },
   async created() {
       this.loggedin();
-      if(this.grupa=="moderator"){
-        this.$router.push({ name: "radovimentor" });
-      }
-      else if(this.grupa=="administrator")
-      {
-        this.$router.push({ name: "kategorijesve" });
-      }
       
   },
   methods: {

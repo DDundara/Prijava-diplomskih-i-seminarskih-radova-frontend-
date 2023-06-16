@@ -1,24 +1,8 @@
 <template>
-    <!-- <div v-if="username">
-    <h1>Hi {{ username }}</h1>
-    <p>{{ secretMessage }}</p>
-    <input type="button" value="Logout" @click="logout" />
-  </div>
-  <div v-else>
-    <h1>Niste prijavljeni!</h1>
-  </div> -->
+
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <!-- <input type="text" class="form-control" placeholder="Pretraga po imenu"
-          v-model="ime"/> -->
-        <!-- <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button"
-            @click="searchName"
-          >
-            Search
-          </button>
-        </div> -->
       </div>
     </div>
     <h4 class="h4w">Popis radova gdje imam mentorstvo:</h4>
@@ -180,7 +164,6 @@ export default {
   },
   mounted() {
     this.vratiRadoveGdjeSamMentor();
-    //this.vratiMentoreRada(rad.idrad);
   }
 };
 </script>

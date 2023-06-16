@@ -38,7 +38,6 @@
         </td>
         <td>
           <a v-bind:href="'/azurirajkategoriju/' + kat.idkat"> Ažuriraj </a>
-          <!-- <a v-bind:href="'/userdelete/' + user.id"> Briši </a> -->
         </td>
       </tr>
     </table>
@@ -53,7 +52,6 @@ export default {
   data() {
     return {
       kategorije: []
-      //page: this.nthIndex()
     };
   },
   methods: {
@@ -62,7 +60,6 @@ export default {
         .then(response => {
           this.kategorije = response.data;
           console.log(response.data);
-          //console.log("stranica: "+this.page);
         })
         .catch(e => {
           console.log(e);
@@ -82,36 +79,6 @@ export default {
   text-align: left;
   max-width: 750px;
   margin: auto;
-}
-
-.pagination {
-  display: inline-block;
-  height: 45px;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
-.newline{
-  display: block;
-  clear: both;
-  margin-top: 50px;
-    margin-left: -143px;
-}
-
-.h4w{
-  width: 100% !important;
 }
 
 </style>

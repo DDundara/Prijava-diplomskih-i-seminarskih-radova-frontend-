@@ -91,11 +91,9 @@ export default {
 
       UsersDataService.updateWorkStatus(this.RadId,data)
         .then(response => {
-          //this.user.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
           if(this.grupa=="administrator"){
-            //this.$router.push({ name: "radoviadmin" });
             this.$router.push({ name: "radoviadmin",params: {page: 1}});
           }
           else
@@ -157,7 +155,5 @@ export default {
   margin: auto;
 }
 
-.btnspace{
-    margin-left: 15px;
-}
+
 </style>

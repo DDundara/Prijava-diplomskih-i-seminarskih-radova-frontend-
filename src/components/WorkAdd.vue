@@ -38,17 +38,6 @@
             type="date"
           />
         </div> 
-        
-        <!-- <div class="form-group frmgroup_resize">
-          <label for="email">E-mail</label>
-          <input
-            class="form-control frmcontr"
-            id="email"
-            required
-            v-model="email"
-            name="email"
-          />
-        </div> -->
   
         <div class="form-group frmgroup_resize">
           <label for="vrsta">Vrsta</label>
@@ -66,28 +55,16 @@
           </select>
         </div>
   
-        <!-- <div class="form-group frmgroup_resize">
-          <label for="grupa">Grupa</label>
-          <select name="grupaid" id="grupaid" class="form-control frmcontr" v-model="grupaid">
-            <option value="0" selected disabled>Izaberi</option>
-            <option v-for="group in groups" :key="group.idgroup" :value="group.idgroup">{{group.naziv}}</option>
-          </select>
-        </div> -->
-  
         <button @click="saveWork" class="btn btn-success">Spremi</button>
-        <!-- <p v-if="msg">{{ msg }}</p> -->
-        <!-- <p v-if="errors.length">
-          <b>Please correct the following error(s):</b>
-          <ul>
-           <li v-for="err in errors" :key="err.key">{{ err }}</li>
-          </ul>
-        </p> -->
+
       </div>
-  
-      <div v-else>
-        <h4>You submitted successfully!</h4>
-        <button class="btn btn-success" @click="signUp">Sign up</button>
-      </div>
+      <p v-if="errors.length" class="greskerazmak">
+        <b>Ispravite sljedeće greške:</b>
+        <ul>
+         <li class="greskeboja" v-for="err in errors" :key="err.key">{{ err }} </li>
+        </ul>
+      </p>
+
     </div>
   </template>
   
@@ -123,55 +100,42 @@
             opis: this.opis,
             kategorijarada:this.kategorijarada,
             vrstarada: this.vrstarada,         
-            //autor:this.autor,
             statusid:this.status,
             autorid:this.autorid,
             datumd: this.datumd
           };
   
           this.errors = [];
-  
-          if (!this.name) {
-          this.errors.push('Name required.');
-          }
-          if (!this.username) {
-          this.errors.push('Username required.');
-          }
-  
-          if (!this.password) {
-          this.errors.push('Password required.');
-          }
-  
-          if (!this.password_repeat) {
-          this.errors.push('Password repeat required.');
-          }
-  
-          if (this.password != this.password_repeat) {
-          this.errors.push('Passwords must be the same!');
-          }
-  
-          if (!this.email) {
-          this.errors.push('E-mail required.');
-          }
-  
-          if (!this.spol) {
-          this.errors.push('Gender required.');
-          }
-  
-          if (!this.gradid || this.gradid==0) {
-          this.errors.push('Grad required.');
-          }
 
-        UsersDataService.createWork(data)
-        .then(response => {
-          //this.user.id = response.data.id;
-          console.log(response.data);
-          this.submitted = true;
-          this.$router.push({ name: "mojiradovi" });
-        })
-        .catch(e => {
-          console.log(e);
-        });
+          if (!this.nazivrada) {
+            this.errors.push('Naziv rada je prazan!');
+            }
+
+            if (!this.opis) {
+            this.errors.push('Opis rada je prazan!');
+            }
+            if (!this.datumd) {
+            this.errors.push('Datum dospjeća rada je prazan!');
+            }
+            if (!this.vrstarada) {
+            this.errors.push('Vrsta rada je obavezan odabir!');
+            }
+            if (!this.kategorijarada) {
+            this.errors.push('Kategorija rada je prazna!');
+            }
+
+
+      if(this.errors.length==0){
+            UsersDataService.createWork(data)
+            .then(response => {
+              console.log(response.data);
+              this.submitted = true;
+              this.$router.push({ name: "mojiradovi" });
+            })
+            .catch(e => {
+              console.log(e);
+            });
+      }
     },
     async loggedin(){
       console.log("Local storage 5: "+localStorage.getItem("loggeduser"))
@@ -182,18 +146,6 @@
         this.secretMessage = await AuthService.getSecretContent();
       }
     },
-  
-          // if(this.errors.length==0){
-          //   return true;
-          // }
-  
-  
-          //console.log("errors:"+this.errors[0]);
-        //   if(this.errors.length==0){
-        //   const response = await AuthService.signUp(credentials);
-        //   this.msg = response.msg;
-        //   this.$router.push('/');
-        //   }
     vratiKategorije() {
       UsersDataService.getKategorije()
         .then(response => {

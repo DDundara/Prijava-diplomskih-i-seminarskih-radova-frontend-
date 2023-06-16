@@ -43,7 +43,8 @@ export default {
     return {
       username: '',
       password: '',
-      msg: ''
+      msg: '',
+      grupa: ''
     };
   },
   methods: {
@@ -61,15 +62,28 @@ export default {
         const user = response.user;
         console.log("Userrr name: "+user.username)
         console.log("Userrr id: "+user.id)
-        //const grupaid = response.userIdGroup;
+
         console.log("Grupaaa id: "+user.groupid)
         console.log("Grupaaa naziv: "+user.naziv)
-        //this.$store.dispatch('login', { token, user });
+        this.grupa = user.naziv;
+
         localStorage.setItem("loggeduser",user.username)       
         localStorage.setItem("loggeduserid",user.id)       
         localStorage.setItem("loggedusergroup",user.naziv)    
-        //this.$router.push('/');
-        window.location="/";
+
+
+
+        if(this.grupa=="moderator"){
+        this.$router.push({ name: "radovimentor" });
+        }
+        else if(this.grupa=="administrator")
+        {
+          this.$router.replace('/kategorijesve')
+          .then(()=>{
+            window.location.reload();
+          });
+        }
+
       } catch (error) {
         this.msg = error.response.data.msg;
       }

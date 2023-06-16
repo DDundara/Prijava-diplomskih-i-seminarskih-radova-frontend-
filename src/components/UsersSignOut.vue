@@ -23,10 +23,12 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
-      //this.$router.push('/home');
-      //location.reload();
-      //this.$router.go();
-      window.location="/home";
+      this.$router.replace('/home')
+      .then(()=>{
+        window.location.reload();
+      });
+        
+      
     }
   }
 };
