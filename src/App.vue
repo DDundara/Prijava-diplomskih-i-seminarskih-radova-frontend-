@@ -27,22 +27,12 @@
         <li class="nav-item">
           <router-link to="/radoviadmin/1" class="nav-link" v-if="username && grupa=='administrator'">Svi radovi</router-link>
         </li>
-        <!-- <li class="nav-item">
-          <router-link to="/sortingdata" class="nav-link">Sort</router-link>
-        </li> -->
         <li class="nav-item">
           <router-link to="/login" class="nav-link" v-if="!username">Prijava</router-link>
         </li>
         <li class="nav-item" v-if="username && grupa=='administrator'">
           <router-link to="/signup" class="nav-link">Novi korisnik</router-link>
         </li>
-
-        <!-- <li class="nav-item userloginposition" v-if="username">
-          <router-link to="/signout" class="nav-link">Vi ste: {{username}}</router-link>
-        </li>
-        <li class="nav-item" v-if="username">
-          <router-link to="/signout" class="nav-link">Odjava</router-link>
-        </li> -->
       </div>
       <div id="login" v-if="username">
         <router-link to="/" class="loggedin">Vi ste: {{username}}, tip {{ grupa }}</router-link>
@@ -87,6 +77,7 @@ export default {
         this.grupa = localStorage.getItem("loggedusergroup");
         this.secretMessage = await AuthService.getSecretContent();
       }
+
     }
   }
 };
