@@ -7,42 +7,7 @@ const routes =  [
     name: "home",
     component: () => import("./components/Home")
   },
-  {
-    //path: "/",
-    path: "/tutorials",
-    name: "tutorials",
-    component: () => import("./components/TutorialsList")
-  },
-  {
-    path: "/tutorialsfull",
-    name: "tutorialsfull",
-    component: () => import("./components/TutorialsListFull")
-  },
-  {
-    path: "/tutorials/:id",
-    name: "tutorial-details",
-    component: () => import("./components/Tutorial")
-  },
-  {
-    path: "/tutorialsdelete/:id",
-    name: "tutorial-details2",
-    component: () => import("./components/TutorialDelete")
-  },
-  {
-    path: "/add",
-    name: "add",
-    component: () => import("./components/AddTutorial")
-  },
-  {
-    path: "/students",
-    name: "students",
-    component: () => import("./components/StudentsListFull")
-  },
-  {
-    path: "/dvorane",
-    name: "dvorane",
-    component: () => import("./components/DvoraneListFull")
-  },
+
   {
     path: "/users",
     name: "users",
