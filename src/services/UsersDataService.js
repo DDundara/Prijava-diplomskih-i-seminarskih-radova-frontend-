@@ -141,6 +141,10 @@ class UsersDataService {
     return http.post("/kategorijesve", data);
   }
 
+  createNoviGrad(data){
+    return http.post("/cities", data);
+  }
+
   getAllMentori() {
     return http.get("/svimentori");
   }
@@ -182,28 +186,7 @@ class UsersDataService {
     return http.delete(`/radovitotal?idrad=${idrad}`);
   }
 
-/*
-  get(id) {
-    return http.get(`/tutorials/${id}`);
-  }
 
-
-
-  update(id, data) {
-    return http.put(`/tutorials/${id}`, data);
-  }
-
-  delete(id) {
-    return http.delete(`/tutorials/${id}`);
-  }
-
-  deleteAll() {
-    return http.delete(`/tutorials`);
-  }
-*/
-  // findByName(name) {
-  //   return http.get(`/dvorane?ime=${name}`);
-  // }
   
 }
 
