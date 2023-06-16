@@ -1,5 +1,4 @@
 <template>
-
   <div class="list row">
     <div class="col-md-8">
       <h4>Pretraga po datumu dospijeća</h4>
