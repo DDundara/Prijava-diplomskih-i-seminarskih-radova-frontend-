@@ -1,19 +1,13 @@
 <template>
-    <!-- <div v-if="username">
-    <h1>Hi {{ username }}</h1>
-    <p>{{ secretMessage }}</p>
-    <input type="button" value="Logout" @click="logout" />
-  </div>
-  <div v-else>
-    <h1>Niste prijavljeni!</h1>
-  </div> -->
+
   <div class="list row">
     <div class="col-md-8">
+      <h4>Pretraga po datumu dospijeća</h4>
       <div class="input-group mb-3">
-         <div class="razmak">Datum od:<input type="date" class="form-control" placeholder="Datum od" v-model="datumod"/></div>
-         <div class="razmak">Datum do:<input type="date" class="form-control" placeholder="Datum do" v-model="datumdo"/></div>
+         <div class="formakontrola razmak">Datum od:</div><input type="date" class="form-control" placeholder="Datum od" v-model="datumod"/>
+         <div class="formakontrola razmak">Datum do:</div><input type="date" class="form-control" placeholder="Datum do" v-model="datumdo"/>
       </div>
-      <div class="input-group-append">
+      <div class="input-group-append ">
           <button class="btn btn-outline-secondary btnfont" type="button"
             @click="vratiRadoveGdjeSamMentorPretraga"
           >
@@ -66,8 +60,6 @@
         </td>
       </tr>
     </table>
-    
-    <!-- <a v-bind:href="'/addwork'" class="m-3 btn btn-sm btn-primary"> Novi rad </a> -->
 
   </div>
 </template>
@@ -158,31 +150,5 @@ export default {
   max-width: 750px;
   margin: auto;
 }
-.tblfont{
-  font-size: 12px;
-}
 
-.h4w{
-  width: 100% !important;
-}
-
-.tblduz{
-    width: 1340px !important;
-}
-
-.razmak{
-    margin-left: 15px !important;
-}
-
-.btnnovired{
-    clear: both;
-    display: block !important;
-    
-}
-
-.btnfont{
-    margin-left: 15px !important;
-    background-color: aquamarine;
-    font-size: 12px;
-}
 </style>
